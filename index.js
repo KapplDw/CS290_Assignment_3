@@ -140,11 +140,26 @@ create_twit.addEventListener('click', insertTwit);
 // Search Functions
 
 function searchCheck(event){
+    // Make everything Lower case from the search
     var searchTerm = document.querySelector("#navbar-search-input").value;
     var lowerSearch = [];
     lowerSearch = searchTerm.toLowerCase();
     searchTerm = lowerSearch;
-    console.log(searchTerm);
+    
+
+    var twits = document.getElementsByClassName("twit-text");
+    var twitAuthor = document.getElementsByClassName("twit-author");
+    for(var i = twits.length-1; i >= 0; i--){
+        var indivTwit = twits[i].textContent.toLocaleLowerCase();
+        var indivAuth = twitAuthor[i].textContent.toLocaleLowerCase();
+        if (indivTwit.includes(searchTerm) == true || indivAuth.includes(searchTerm) == true){
+            console.log("Confirmed");
+        }
+        else{
+            twits[i].parentElement.parentElement.parentElement.removeChild(twits[i].parentElement.parentElement);
+        }
+    }
+
 }
 
 var search = document.querySelector("#navbar-search-button");
